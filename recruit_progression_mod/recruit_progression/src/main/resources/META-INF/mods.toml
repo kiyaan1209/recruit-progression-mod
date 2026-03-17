@@ -1,0 +1,36 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+    modId="recruitprogression"
+    version="1.0.0"
+    displayName="Recruit Progression"
+    description='''
+        Adds a full rank progression system and auto class-selection to the
+        Villager Recruits mod. Recruits earn XP by killing monsters and enemy
+        recruits, rank up through 9 tiers (Apprentice → Grandmaster), and
+        automatically choose their own weapon class when first summoned.
+    '''
+
+[[dependencies.recruitprogression]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.recruitprogression]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.21)"
+    ordering="NONE"
+    side="BOTH"
+
+# Hard dependency on Villager Recruits mod
+[[dependencies.recruitprogression]]
+    modId="recruits"
+    mandatory=true
+    versionRange="[2.0,)"
+    ordering="AFTER"
+    side="BOTH"

@@ -1,0 +1,64 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// Recruit Progression — build.gradle
+// Target: Minecraft 1.20.1  |  Forge 47.x  |  Java 17
+// ─────────────────────────────────────────────────────────────────────────────
+plugins {
+    id 'java'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+}
+
+group   = 'com.recruitprogression'
+version = '1.0.0'
+
+java {
+    toolchain { languageVersion = JavaLanguageVersion.of(17) }
+}
+
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.console.level', 'debug'
+            mods { recruitprogression { source sourceSets.main } }
+        }
+        server {
+            workingDirectory project.file('run')
+            property 'forge.logging.console.level', 'debug'
+            mods { recruitprogression { source sourceSets.main } }
+        }
+    }
+}
+
+repositories {
+    maven {
+        // Villager Recruits mod is on CurseForge Maven
+        name = 'CurseMaven'
+        url  = 'https://cursemaven.com'
+    }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.2.0'
+
+    // Villager Recruits — use CurseMaven project ID 397452
+    // Replace 'curse.maven:villager-recruits-397452:FILE_ID' with the
+    // actual file ID from CurseForge (check the Files tab for 1.20.1).
+    // Example file ID shown below — update if a newer build exists.
+    compileOnly fg.deobf('curse.maven:villager-recruits-397452:4611899')
+}
+
+jar {
+    manifest {
+        attributes([
+            'Specification-Title'     : 'recruitprogression',
+            'Specification-Vendor'    : 'YourName',
+            'Specification-Version'   : '1',
+            'Implementation-Title'    : project.name,
+            'Implementation-Version'  : project.version,
+            'Implementation-Vendor'   : 'YourName',
+            'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
